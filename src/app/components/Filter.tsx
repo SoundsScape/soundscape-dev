@@ -1,4 +1,5 @@
 import React from "react";
+import L from "leaflet";
 
 interface Props {
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
@@ -8,6 +9,7 @@ function Filter({ setSelectedCategory }: Props) {
   const categories = [
     "Pop",
     "Rock",
+    "Jazz",
     "Other",
   ];
 
@@ -15,6 +17,15 @@ function Filter({ setSelectedCategory }: Props) {
 
   React.useEffect(() => {
     document.body.className = theme;
+
+  const mapContainer = document.querySelector(".leaflet-container");
+    if (mapContainer) {
+      if (theme === "light-theme") {
+        mapContainer.classList.remove("dark-theme");
+      } else {
+        mapContainer.classList.add("dark-theme");
+      }
+    }
   }, [theme]);
 
   const changeTheme = () => {
