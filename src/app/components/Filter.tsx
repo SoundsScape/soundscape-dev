@@ -9,7 +9,6 @@ function Filter({ setSelectedCategory }: Props) {
   const categories = [
     "Pop",
     "Rock",
-    "Jazz",
     "Other",
   ];
 
