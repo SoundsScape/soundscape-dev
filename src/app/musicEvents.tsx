@@ -8,6 +8,7 @@ const eventsData: MusicEvent[] = [
       "Elvis Presley made his first television appearance on the 'Dorsey Brothers Stage Show' on January 28, 1956, marking the beginning of his rise to fame in popular music.",
     position: [40.758, -73.9855], // New York City, USA
     category: "Rock",
+    date: "1956"
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const eventsData: MusicEvent[] = [
       "The Beatles made their iconic first appearance on The Ed Sullivan Show on February 9, 1964, captivating American audiences and sparking 'Beatlemania' across the nation.",
     position: [40.7644, -73.9847], // New York City, USA
     category: "Rock",
+    date: "1964"
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ const eventsData: MusicEvent[] = [
       "The Woodstock Music Festival, a pivotal moment in music history, took place from August 15 to 18, 1969, featuring legendary performances by artists like Jimi Hendrix, Janis Joplin, and The Who.",
     position: [41.2296, -74.0717], // Bethel, New York, USA
     category: "Rock",
+    date: "1969"
   },
   {
     id: 4,
@@ -32,6 +35,7 @@ const eventsData: MusicEvent[] = [
       "During a performance of 'Billie Jean' on the Motown 25: Yesterday, Today, Forever TV special on May 16, 1983, Michael Jackson introduced the world to his iconic dance move, the Moonwalk.",
     position: [34.0522, -118.2437], // Los Angeles, USA
     category: "Pop",
+    date: "1983"
   },
   {
     id: 5,
@@ -40,6 +44,7 @@ const eventsData: MusicEvent[] = [
       "Bob Dylan's electric performance at the Newport Folk Festival on July 25, 1965, marked a significant shift in his career and the folk music genre.",
     position: [41.4822, -71.3138], // Newport, Rhode Island, USA
     category: "Rock",
+    date: "1965"
   },
   {
     id: 6,
@@ -48,6 +53,7 @@ const eventsData: MusicEvent[] = [
       "On August 11, 1973, DJ Kool Herc hosted a back-to-school jam in the Bronx, New York, widely regarded as the birth of hip hop music.",
     position: [40.8136, -73.9451], // Bronx, New York, USA
     category: "Hip Hop",
+    date: "1973"
   },
   {
     id: 7,
@@ -56,6 +62,7 @@ const eventsData: MusicEvent[] = [
       "Queen delivered a legendary performance at the Live Aid concert on July 13, 1985, at Wembley Stadium, solidifying their status as one of the greatest live bands in history.",
     position: [51.556, -0.2795], // London, UK
     category: "Rock",
+    date: "1985"
   },
   {
     id: 8,
@@ -64,6 +71,7 @@ const eventsData: MusicEvent[] = [
       "The Beatles released their groundbreaking album 'Sgt. Pepper's Lonely Hearts Club Band' on June 1, 1967, which revolutionized the concept of the album as an art form.",
     position: [51.5007, -0.1246], // London, UK
     category: "Rock",
+    date: "1967"
   },
   {
     id: 9,
@@ -72,6 +80,7 @@ const eventsData: MusicEvent[] = [
       "Madonna's album 'Like a Virgin' was released on November 12, 1984, catapulting her to international superstardom and redefining the role of women in popular music.",
     position: [40.7128, -74.006],
     category: "Pop",
+    date: "1984"
   },
   {
     id: 10,
@@ -80,6 +89,7 @@ const eventsData: MusicEvent[] = [
       "The Rolling Stones' concert at Altamont Speedway on December 6, 1969, turned tragic with the death of a concertgoer, marking the end of the peace and love era of the 1960s.",
     position: [37.6846, -121.768], // Altamont, California, USA
     category: "Rock",
+    date: "1969"
   },
 ];
 

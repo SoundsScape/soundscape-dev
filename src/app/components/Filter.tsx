@@ -37,8 +37,8 @@ function Filter({ setSelectedCategory }: Props) {
   };
 
   return (
-    <div className="filter">
-      <div className="filter__select">
+    <div className="flex flex-row">
+      <div className="filter__select mr-4">
         <select onChange={(e) => setSelectedCategory(e.target.value)}>
           <option value="">All</option>
           {categories.map((category) => (
