@@ -6,7 +6,7 @@ import eventsData from "../musicEvents";
 import FlyToMarker from "./FlyToMarker";
 import Filter from "./Filter";
 
-export interface HistoricalEvent {
+export interface MusicEvent {
   id: number;
   title: string;
   description: string;
@@ -34,7 +34,7 @@ function MapsApp() {
   });
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [activeEvent, setActiveEvent] = useState<HistoricalEvent | null>(null);
+  const [activeEvent, setActiveEvent] = useState<MusicEvent | null>(null);
   const [favourites, setFavourites] = useState<number[]>(() => {
     const savedFavorites = localStorage.getItem("favourites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
