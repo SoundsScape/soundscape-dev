@@ -148,9 +148,10 @@ function MapsApp() {
       </div>
 
       <div className="liked-events">
-        <h2 className="liked-events__title">
+        <h2 className="liked-events__title pb-2">
           <i className="fa-solid fa-star"></i> Favourite Events
         </h2>
+        <hr className ="pb-6"/>
         <ul>
           {favourites
             .map((id) => {
