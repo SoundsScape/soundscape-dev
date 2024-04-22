@@ -174,7 +174,9 @@ function MapsApp() {
   <hr className="pb-6" />
   <ul>
     {eventsData
-      .filter(event => event.featuredEvent && (!selectedCategory || event.category === selectedCategory))
+      .filter(event => event.featuredEvent && 
+                       (!selectedCategory || event.category === selectedCategory) &&
+                       (!selectedDecade || (parseInt(event.date) >= selectedDecade && parseInt(event.date) < selectedDecade + 10)))
       .map(event => (
         <li key={event.id} className="liked-events__event" onClick={() => {
           handleListItemClick(event?.id as number);
@@ -184,6 +186,7 @@ function MapsApp() {
       ))}
   </ul>
 </div>
+
 
     </div>
   );
