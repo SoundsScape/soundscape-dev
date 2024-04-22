@@ -58,6 +58,8 @@
 .theme-toggler {
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 
   &__checkbox {
     height: 0;
@@ -76,6 +78,7 @@
 
   &__label {
     position: relative;
+    text-align: center;
     width: 54px;
     height: 29px;
     background: var(--body--bg);

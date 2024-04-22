@@ -6,15 +6,16 @@ import eventsData from "../musicEvents";
 import FlyToMarker from "./FlyToMarker";
 import Filter from "./Filter";
 
-export interface HistoricalEvent {
+const defaultPosition: [number, number] = [51.505, -0.09];
+
+export interface MusicEvent {
   id: number;
   title: string;
   description: string;
   position: [number, number];
   category: string;
+  date: string;
 }
-
-const defaultPosition: [number, number] = [51.505, -0.09];
 
 const emptyStar = <i className="fa-regular fa-star"></i>;
 const fullStar = (
@@ -34,11 +35,12 @@ function MapsApp() {
   });
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [activeEvent, setActiveEvent] = useState<HistoricalEvent | null>(null);
+  const [activeEvent, setActiveEvent] = useState<MusicEvent | null>(null);
   const [favourites, setFavourites] = useState<number[]>(() => {
     const savedFavorites = localStorage.getItem("favourites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
+  const [selectedDecade, setSelectedDecade] = useState<number | null>(null);
 
   const handleFavouriteClick = (eventId: number) => {
     let updatedFavourites = favourites.filter((id) => id !== eventId);
@@ -52,19 +54,34 @@ function MapsApp() {
   };
 
   const handleListItemClick = (eventId: number) => {
-    //find by id
     const event = eventsData.find((event) => event.id === eventId);
 
     if (event) {
-      //set the active to open the popup
       setActiveEvent(event);
     }
+  };
+
+  const handleDecadeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedDecade(parseInt(e.target.value));
   };
 
   return (
     <div className="content">
       <div className="map-content flex flex-col gap-6 h-full">
-        <Filter setSelectedCategory={setSelectedCategory} />
+        <div className="filter">
+          <Filter setSelectedCategory={setSelectedCategory} />
+          {/* Input range para seleccionar la década */}
+          <input
+            type="range"
+            min="1950"
+            max="2020"
+            step="10"
+            onChange={handleDecadeChange}
+            className="decade-slider"
+          />
+          {/* Etiqueta para mostrar la década seleccionada */}
+          <p>Decade: {selectedDecade}s</p>
+        </div>
         <MapContainer
           center={defaultPosition}
           zoom={2}
@@ -77,11 +94,18 @@ function MapsApp() {
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
+          {/* Filtrar y mostrar solo los eventos de la década seleccionada */}
           {eventsData
-            .filter(
-              (event) =>
-                !selectedCategory || event.category === selectedCategory
-            )
+            .filter((event) => {
+              if (selectedCategory && event.category !== selectedCategory) {
+                return false;
+              }
+              if (selectedDecade) {
+                const eventYear = parseInt(event.date);
+                return eventYear >= selectedDecade && eventYear < selectedDecade + 10;
+              }
+              return true;
+            })
             .map((event) => {
               return (
                 <Marker
