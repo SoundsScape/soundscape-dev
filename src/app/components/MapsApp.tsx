@@ -40,6 +40,7 @@ export interface MusicEvent {
   position: [number, number];
   category: string;
   date: string;
+  featuredEvent: boolean;
 }
 
 const emptyStar = <i className="fa-regular fa-star"></i>;
@@ -89,10 +90,6 @@ function MapsApp() {
     if (event) {
       setActiveEvent(event);
     }
-  };
-
-  const handleDecadeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedDecade(parseInt(e.target.value));
   };
 
   return (
@@ -161,16 +158,6 @@ function MapsApp() {
               <p className="popup-inner__description">
                 {activeEvent.description}
               </p>
-              <button
-                className="popup-inner__button"
-                onClick={() => handleFavouriteClick(activeEvent.id)}
-              >
-                {favourites.includes(activeEvent.id) ? (
-                  <span>{fullStar} Unfavourite</span>
-                ) : (
-                  <span>{emptyStar} Favourite</span>
-                )}
-              </button>
             </Popup>
           )}
 
@@ -181,30 +168,23 @@ function MapsApp() {
       </div>
 
       <div className="liked-events">
-        <h2 className="liked-events__title pb-2">
-          <i className="fa-solid fa-star"></i> Favourite Events
-        </h2>
-        <hr className="pb-6" />
-        <ul>
-          {favourites
-            .map((id) => {
-              return eventsData.find((event) => event.id === id);
-            })
-            .map((event) => {
-              return (
-                <li
-                  key={event?.id}
-                  className="liked-events__event"
-                  onClick={() => {
-                    handleListItemClick(event?.id as number);
-                  }}
-                >
-                  <h3>{event?.title}</h3>
-                </li>
-              );
-            })}
-        </ul>
-      </div>
+  <h2 className="liked-events__title pb-2">
+    <i className="fa-solid fa-star"></i> Featured Events
+  </h2>
+  <hr className="pb-6" />
+  <ul>
+    {eventsData
+      .filter(event => event.featuredEvent && (!selectedCategory || event.category === selectedCategory))
+      .map(event => (
+        <li key={event.id} className="liked-events__event" onClick={() => {
+          handleListItemClick(event?.id as number);
+        }}>
+          <h3>{event.title}</h3>
+        </li>
+      ))}
+  </ul>
+</div>
+
     </div>
   );
 }
