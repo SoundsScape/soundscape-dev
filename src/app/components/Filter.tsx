@@ -49,7 +49,7 @@ function Filter({ setSelectedCategory }: Props) {
         </select>
       </div>
 
-      <div className="theme-toggler">
+      <div className="theme-toggler pr-7">
         <input
           type="checkbox"
           id="theme-toggler__checkbox"
