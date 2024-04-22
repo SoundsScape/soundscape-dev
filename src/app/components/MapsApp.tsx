@@ -6,6 +6,31 @@ import eventsData from "../musicEvents";
 import FlyToMarker from "./FlyToMarker";
 import Filter from "./Filter";
 
+
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import { Value } from "sass";
+
+
+const YearMarks = {
+  1400: "1400",
+  1450: "1450",
+  1500: "1500",
+  1550: "1550",
+  1600: "1600",
+  1650: "1650",
+  1700: "1700",
+  1750: "1750",
+  1800: "1800",
+  1850: "1850",
+  1900: "1900",
+  1950: "1950",
+  2000: "2000",
+  2024: "2024",
+};
+
+
+
 const defaultPosition: [number, number] = [51.505, -0.09];
 
 export interface MusicEvent {
@@ -34,13 +59,18 @@ function MapsApp() {
     iconAnchor: [12, 41],
   });
 
+  const [selectedDecade, setSelectedDecade] = useState<number>(2000);
+
+  const setYear = (value: number) => {
+    setSelectedDecade(value);
+  };
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [activeEvent, setActiveEvent] = useState<MusicEvent | null>(null);
   const [favourites, setFavourites] = useState<number[]>(() => {
     const savedFavorites = localStorage.getItem("favourites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
-  const [selectedDecade, setSelectedDecade] = useState<number | null>(null);
 
   const handleFavouriteClick = (eventId: number) => {
     let updatedFavourites = favourites.filter((id) => id !== eventId);
@@ -68,19 +98,22 @@ function MapsApp() {
   return (
     <div className="content">
       <div className="map-content flex flex-col gap-6 h-full">
-        <div className="filter">
+        <div className="filter" style={{ display: "flex", justifyContent: "center" }}>
           <Filter setSelectedCategory={setSelectedCategory} />
+
           {/* Input range para seleccionar la década */}
-          <input
-            type="range"
-            min="1950"
-            max="2020"
-            step="10"
-            onChange={handleDecadeChange}
-            className="decade-slider"
+          <Slider
+            defaultValue={2000}
+            min={1400}
+            max={2024}
+            step={10}
+            onChange={(value) => setYear(Array.isArray(value) ? value[0] : value)}
+            marks={YearMarks}
+            style={{ width: "65%" }}
           />
+
           {/* Etiqueta para mostrar la década seleccionada */}
-          <p>Decade: {selectedDecade}s</p>
+          {/* <p>Decade: {selectedDecade}s</p> */}
         </div>
         <MapContainer
           center={defaultPosition}
@@ -151,7 +184,7 @@ function MapsApp() {
         <h2 className="liked-events__title pb-2">
           <i className="fa-solid fa-star"></i> Favourite Events
         </h2>
-        <hr className ="pb-6"/>
+        <hr className="pb-6" />
         <ul>
           {favourites
             .map((id) => {
